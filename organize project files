@@ -1,0 +1,18 @@
+  app/
+  ├── node_modules/
+  ├── app.js
+  ├── package.json
+  ├── package-lock.json
+  ├── routes/
+  |     ├── adminRoutes.js
+  |     └── projectRoutes.js
+  ├── controllers/
+  |     ├── adminController.js
+  |     └── projectController.js
+  ├── middleware/
+  |     └── authenticationMiddleware.js
+  ├── config/
+  |     └── databaseConfig.js
+  ├── models/
+        └── AdminModel.js
+
