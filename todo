@@ -1,0 +1,45 @@
+SQL ->
+CREATE TABLE Project (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  description TEXT,
+  price DECIMAL(10, 2) NOT NULL,
+  image_link VARCHAR(255),
+  published BOOLEAN NOT NULL
+);
+
+CREATE TABLE admins (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+);
+
+CREATE TABLE user_purchased_courses (
+  id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(id),
+  course_id INT REFERENCES courses(id)
+);
+
+--Purchase Course (User):
+app.post('/users/courses/:courseId', authenticateJwt, async (req, res) => {
+
+});
+
+--SQL equivalent (to add a purchased course for the user):
+INSERT INTO user_purchased_courses (user_id, course_id)
+VALUES (userId, courseId);
+
+--Get Purchased Courses (User):
+app.get('/users/purchasedCourses', authenticateJwt, async (req, res) => {
+
+});
+--SQL equivalent (to retrieve a user's purchased courses):
+SELECT courses.* FROM courses
+JOIN user_purchased_courses ON courses.id = user_purchased_courses.course_id
+WHERE user_purchased_courses.user_id = userId;
