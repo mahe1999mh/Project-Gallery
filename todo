@@ -27,20 +27,26 @@ CREATE TABLE user_purchased_Project (
 );
 
 
---Purchase Course (User):
+--get Purchase Course (User):
 app.post('/users/courses/:courseId', authenticateJwt, async (req, res) => {
 
 });
+-- Get Purchase Course Details for User 1 and Purchase ID 1
+SELECT Project.id, Project.title, Project.description, Project.price
+FROM Project
+JOIN user_purchased_Project ON Project.id = user_purchased_Project.Project_id
+WHERE user_purchased_Project.user_id = 1
+AND user_purchased_Project.id = 1;
+
 
 --SQL equivalent (to add a purchased course for the user):
 INSERT INTO user_purchased_courses (user_id, course_id)
 VALUES (userId, courseId);
 
 --Get Purchased Courses (User):
-app.get('/users/purchasedCourses', authenticateJwt, async (req, res) => {
+-- Get Purchased Courses for a specific user (replace user_id_value with the user's ID)
+SELECT Project.id, Project.title, Project.description, Project.price
+FROM Project
+JOIN user_purchased_Project ON Project.id = user_purchased_Project.Project_id
+WHERE user_purchased_Project.user_id = user_id_value;
 
-});
---SQL equivalent (to retrieve a user's purchased courses):
-SELECT courses.* FROM courses
-JOIN user_purchased_courses ON courses.id = user_purchased_courses.course_id
-WHERE user_purchased_courses.user_id = userId;
