@@ -17,14 +17,15 @@ CREATE TABLE admins (
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
   username VARCHAR(255) NOT NULL,
-  password VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE user_purchased_courses (
+CREATE TABLE user_purchased_Project (
   id SERIAL PRIMARY KEY,
   user_id INT REFERENCES users(id),
-  course_id INT REFERENCES courses(id)
+  Project_id INT REFERENCES Project(id)
 );
+
 
 --Purchase Course (User):
 app.post('/users/courses/:courseId', authenticateJwt, async (req, res) => {
