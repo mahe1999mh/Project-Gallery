@@ -50,3 +50,11 @@ FROM Project
 JOIN user_purchased_Project ON Project.id = user_purchased_Project.Project_id
 WHERE user_purchased_Project.user_id = user_id_value;
 
+
+--Get Purchased Courses (User):
+-- Get Purchased Courses for a specific user (replace user_id_value with the user's ID)
+SELECT Project.id, Project.title, Project.description, Project.price
+FROM Project prjt
+JOIN user_purchased_Project upp ON prjt.id = upp.Project_id
+WHERE upp.user_id = user_id;
+
