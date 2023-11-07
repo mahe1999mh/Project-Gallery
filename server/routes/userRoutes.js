@@ -33,7 +33,7 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/projects', (req, res) => {
-  db.query('SELECT * FROM project', (err, results) => {
+  db.query('SELECT * FROM project WHERE published = 1', (err, results) => {
     if (err) {
       console.error('Error retrieving projects from the database:', err);
       return res.status(500).json({ message: 'Internal server error' });
@@ -44,9 +44,9 @@ router.get('/projects', (req, res) => {
 
 
 router.get('/projects/:projectId', (req, res) => {
-  const projectId = req.params.projectId;
+  const id = req.params.projectId;
 
-  db.query('SELECT * FROM project WHERE projectid = ?', [projectId], (err, results) => {
+  db.query('SELECT * FROM project WHERE id = ? AND published = 1', [id], (err, results) => {
     if (err) {
       console.error('Error retrieving the project from the database:', err);
       return res.status(500).json({ message: 'Internal server error' });
@@ -59,5 +59,24 @@ router.get('/projects/:projectId', (req, res) => {
   });
 });
 
+router.get('/purchasedcourses/', async (req, res) => {
+  // const user_id = req.params.user_id;
+
+  const sqlQuery = `
+    SELECT Project.id, Project.title, Project.description, Project.price
+    FROM Project
+    INNER JOIN user_purchased_Project ON Project.id = user_purchased_Project.Project_id
+    WHERE user_purchased_Project.user_id = 1;
+  `;
+
+  try {
+    const results = await db.query(sqlQuery);
+
+    res.status(200).json(results.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 module.exports = router;

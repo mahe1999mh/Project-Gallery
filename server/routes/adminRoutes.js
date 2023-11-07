@@ -34,11 +34,11 @@ router.post('/login', (req, res) => {
 
 // POST: Create a project
 router.post('/projects', authenticateJwt, (req, res) => {
-  const { title, description, price } = req.body;
+  const { title, description, price ,image_link,published} = req.body;
   if (!title || !description || !price) {
     return res.status(400).json({ message: 'Missing required fields' });
   }
-  db.query('INSERT INTO project (title, description, price) VALUES (?, ?, ?)', [title, description, price], (err, result) => {
+  db.query('INSERT INTO project (title, description, price) VALUES (?, ?, ?)', [title, description, price,image_link,published], (err, result) => {
     if (err) {
       console.error('Error inserting project into the database:', err);
       return res.status(500).json({ message: 'Internal server error' });
@@ -60,9 +60,9 @@ router.get('/projects', authenticateJwt, (req, res) => {
 
 // GET: Get a project by ID
 router.get('/projects/:projectId', authenticateJwt, (req, res) => {
-  const projectId = req.params.projectId;
+  const id = req.params.projectId;
 
-  db.query('SELECT * FROM project WHERE projectid = ?', [projectId], (err, results) => {
+  db.query('SELECT * FROM project WHERE id = ?', [id], (err, results) => {
     if (err) {
       console.error('Error retrieving the project from the database:', err);
       return res.status(500).json({ message: 'Internal server error' });
@@ -77,9 +77,9 @@ router.get('/projects/:projectId', authenticateJwt, (req, res) => {
 
 // DELETE: Delete a project by ID
 router.delete('/projects/:projectId', authenticateJwt, (req, res) => {
-  const projectId = req.params.projectId;
+  const id = req.params.projectId;
 
-  db.query('DELETE FROM project WHERE projectid = ?', [projectId], (err, result) => {
+  db.query('DELETE FROM project WHERE id = ?', [id], (err, result) => {
     if (err) {
       console.error('Error deleting project from the database:', err);
       return res.status(500).json({ message: 'Internal server error' });
