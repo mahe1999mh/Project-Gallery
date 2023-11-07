@@ -27,16 +27,10 @@ CREATE TABLE user_purchased_Project (
 );
 
 
---get Purchase Course (User):
-app.post('/users/courses/:courseId', authenticateJwt, async (req, res) => {
-
-});
--- Get Purchase Course Details for User 1 and Purchase ID 1
-SELECT Project.id, Project.title, Project.description, Project.price
-FROM Project
-JOIN user_purchased_Project ON Project.id = user_purchased_Project.Project_id
-WHERE user_purchased_Project.user_id = 1
-AND user_purchased_Project.id = 1;
+--get all User Purchase Course:
+SELECT users.id, users.username
+      FROM users
+      JOIN user_purchased_Project ON users.id = user_purchased_Project.user_id
 
 
 --SQL equivalent (to add a purchased course for the user):
