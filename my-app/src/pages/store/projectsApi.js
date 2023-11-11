@@ -7,19 +7,26 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const projectsApi = createApi({
     reducerPath:"projectsApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/" }),
+
+  //GET
   endpoints: (build) => ({
-    // Define your endpoints here
     getProjectsApi: build.query({
-      query: () => `user/projects`,
+      query: () => `user/projects`, //endpoints
     }),
-    // createUser: build.mutation({
-    //   query: (newUser) => ({
-    //     url: 'user',
-    //     method: 'POST',
-    //     body: newUser,
-    //   }),
-    // }),
+
+    createProject: build.mutation({
+      query: (projectData) => ({
+        url: '/projects',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer `,
+        },
+        body: projectData,
+      }),
+    }),
+
   }),
 });
 
-export const { useGetProjectsApiQuery } = projectsApi;
+export const { useGetProjectsApiQuery ,createProject } = projectsApi;
