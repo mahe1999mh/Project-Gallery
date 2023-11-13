@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useGetProjectsApiQuery } from './pages/store/projectsApi'; // Adjust the path accordingly
 import LoginForm from './pages/auth/Login';
+import ProjectsLists from './ProjectsList';
 
 const ProjectsList = () => {
   const { data: projects, error, isLoading } = useGetProjectsApiQuery();
@@ -23,16 +24,17 @@ const ProjectsList = () => {
   console.log(projects?.projects);
   return (
     <div>
-      <LoginForm/>
-    {projects?.projects?.map(project => (
-      <div key={project.id}>
-        <img src={project.image_link} alt={project.title} />
-        <h2>{project.title}</h2>
-        <p>{project.description}</p>
-        <p>Price: ${project.price}</p>
-      </div>
-    ))}
-  </div>
+      <LoginForm />
+      <ProjectsLists />
+      {projects?.projects?.map(project => (
+        <div key={project.id}>
+          <img src={project.image_link} alt={project.title} />
+          <h2>{project.title}</h2>
+          <p>{project.description}</p>
+          <p>Price: ${project.price}</p>
+        </div>
+      ))}
+    </div>
   );
 };
 

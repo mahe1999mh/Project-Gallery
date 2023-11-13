@@ -5,7 +5,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const projectsApi = createApi({
-    reducerPath:"projectsApi",
+  reducerPath: "projectsApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/" }),
 
   //GET
@@ -29,4 +29,4 @@ export const projectsApi = createApi({
   }),
 });
 
-export const { useGetProjectsApiQuery ,createProject } = projectsApi;
+export const { useGetProjectsApiQuery, createProject } = projectsApi;

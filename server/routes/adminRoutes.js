@@ -1,44 +1,45 @@
 const express = require('express');
 const router = express.Router();
-const { authenticateJwt,generateJwt  } = require('../middleware/authenticationMiddleware');
+const { authenticateJwt, generateJwt } = require('../middleware/authenticationMiddleware');
 const db = require('../config/databaseConfig');
 
 router.post('/signup', (req, res) => {
-    const admin = req.body;
-    db.query('INSERT INTO admins (username, password) VALUES (?, ?)', [admin.username, admin.password], (err, result) => {
-      if (err) {
-        console.error('Error inserting admin into the database:', err);
-        res.status(500).json({ message: 'Internal server error' });
-      } else {
-        const token = generateJwt(admin);
-        res.json({ message: 'Admin created successfully', token });
-      }
-    });
+  const admin = req.body;
+  db.query('INSERT INTO admins (username, password) VALUES (?, ?)', [admin.username, admin.password], (err, result) => {
+    if (err) {
+      console.error('Error inserting admin into the database:', err);
+      res.status(500).json({ message: 'Internal server error' });
+    } else {
+      const token = generateJwt(admin);
+      res.json({ message: 'Admin created successfully', token });
+    }
   });
+});
 
-  // POST: Admin Login
+// POST: Admin Login
 router.post('/login', (req, res) => {
-    const { username, password } = req.headers;
-    db.query('SELECT * FROM admins WHERE username = ? AND password = ?', [username, password], (err, results) => {
-      if (err) {
-        console.error('Error querying the database:', err);
-        res.status(500).json({ message: 'Internal server error' });
-      } else if (results.length > 0) {
-        const token = generateJwt(results[0]);
-        res.json({ message: 'Logged in successfully', token });
-      } else {
-        res.status(403).json({ message: 'Admin authentication failed' });
-      }
-    });
+  const { username, password } = req.headers;
+  db.query('SELECT * FROM admins WHERE username = ? AND password = ?', [username, password], (err, results) => {
+    if (err) {
+      console.error('Error querying the database:', err);
+      res.status(500).json({ message: 'Internal server error' });
+    } else if (results.length > 0) {
+      const token = generateJwt(results[0]);
+      res.json({ message: 'Logged in successfully', token });
+    } else {
+      res.status(403).json({ message: 'Admin authentication failed' });
+    }
   });
+});
 
 // POST: Create a project
 router.post('/projects', authenticateJwt, (req, res) => {
-  const { title, description, price ,image_link,published} = req.body;
+
+  const { title, description, price, image_link, published } = req.body;
   if (!title || !description || !price) {
     return res.status(400).json({ message: 'Missing required fields' });
   }
-  db.query('INSERT INTO project (title, description, price) VALUES (?, ?, ?)', [title, description, price,image_link,published], (err, result) => {
+  db.query('INSERT INTO project (title, description, price,image_link,published) VALUES (?, ?, ?, ?, ?)', [title, description, price, image_link, published], (err, result) => {
     if (err) {
       console.error('Error inserting project into the database:', err);
       return res.status(500).json({ message: 'Internal server error' });
