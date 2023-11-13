@@ -11,7 +11,7 @@ const LoginForm = () => {
 
   const [login, { isLoading, error, data }] = useLoginMutation();
 
-  console.log(data,"logindata" );
+  console.log(data, "logindata");
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
