@@ -17,20 +17,41 @@ router.post('/signup', (req, res) => {
   });
 
   // POST: Admin Login
+  // POST: Admin Login
 router.post('/login', (req, res) => {
-    const { username, password } = req.headers;
-    db.query('SELECT * FROM admins WHERE username = ? AND password = ?', [username, password], (err, results) => {
+  const { username, password } = req.body; // Change from req.headers to req.body
+
+  // Add validation for missing username or password
+  if (!username || !password) {
+      return res.status(400).json({ message: 'Username and password are required' });
+  }
+  db.query('SELECT * FROM admins WHERE username = ? AND password = ?', [username, password], (err, results) => {
       if (err) {
-        console.error('Error querying the database:', err);
-        res.status(500).json({ message: 'Internal server error' });
+          console.error('Error querying the database:', err);
+          res.status(500).json({ message: 'Internal server error' });
       } else if (results.length > 0) {
-        const token = generateJwt(results[0]);
-        res.json({ message: 'Logged in successfully', token });
+          const token = generateJwt(results[0]);
+          res.json({ message: 'Logged in successfully', token });
       } else {
-        res.status(403).json({ message: 'Admin authentication failed' });
+          res.status(403).json({ message: 'Admin authentication failed' });
       }
-    });
   });
+});
+
+// router.post('/login', (req, res) => {
+//     const { username, password } = req.headers;
+//     db.query('SELECT * FROM admins WHERE username = ? AND password = ?', [username, password], (err, results) => {
+//       if (err) {
+//         console.error('Error querying the database:', err);
+//         res.status(500).json({ message: 'Internal server error' });
+//       } else if (results.length > 0) {
+//         const token = generateJwt(results[0]);
+//         res.json({ message: 'Logged in successfully', token });
+//       } else {
+//         res.status(403).json({ message: 'Admin authentication failed' });
+//       }
+//     });
+//   });
 
 // POST: Create a project
 router.post('/projects', authenticateJwt, (req, res) => {

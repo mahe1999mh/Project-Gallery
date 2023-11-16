@@ -1,9 +1,9 @@
-
+// authApi.js
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/admin' }), 
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/admin' }),
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (loginData) => ({
@@ -11,9 +11,7 @@ export const authApi = createApi({
         method: 'POST',
         body: loginData,
         headers: {
-          username:loginData.username,
-          password:loginData.password,
-          token:`Bearer ${loginData.token}`
+          'Content-Type': 'application/json',
         },
       }),
     }),
@@ -22,3 +20,6 @@ export const authApi = createApi({
 
 export const { useLoginMutation } = authApi;
 
+export const selectToken = (state) => {
+  return state.authApi.endpoints.login.selectors.mutationResultSelector({}).data?.token;
+};

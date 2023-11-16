@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useLoginMutation } from '../store/authApi';
+import ExampleComponent from '../../ExampleComponent';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,7 @@ const LoginForm = () => {
 
   const [login, { isLoading, error, data }] = useLoginMutation();
 
-  console.log(data,"logindata" );
+  // console.log(data,"logindata" );
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -51,7 +52,7 @@ const LoginForm = () => {
       </label>
       <br />
       <button type="submit" disabled={isLoading}>
-        {isLoading ? 'Logging in...' : 'Login'}
+        {isLoading ? <ExampleComponent/> : 'Login'}
       </button>
       {error && <div>Error: {error.message}</div>}
       {data && <div>Logged in as {login}</div>}
