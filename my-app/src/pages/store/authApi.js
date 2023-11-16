@@ -13,6 +13,7 @@ export const authApi = createApi({
         headers: {
           username:loginData.username,
           password:loginData.password,
+          token:`Bearer ${loginData.token}`
         },
       }),
     }),
