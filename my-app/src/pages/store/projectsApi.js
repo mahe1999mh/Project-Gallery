@@ -20,7 +20,7 @@ export const projectsApi = createApi({
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer `,
+          'Authorization': `Bearer ${projectData?.token}`,
         },
         body: projectData,
       }),
