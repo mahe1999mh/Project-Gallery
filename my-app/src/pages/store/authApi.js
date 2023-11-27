@@ -20,6 +20,3 @@ export const authApi = createApi({
 
 export const { useLoginMutation } = authApi;
 
-export const selectToken = (state) => {
-  return state.authApi.endpoints.login.selectors.mutationResultSelector({}).data?.token;
-};

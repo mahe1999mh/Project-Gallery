@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginForm from './pages/auth/Login';
+import SignIn from './pages/auth/Login';
 
 const App = () => {
 
@@ -7,8 +7,7 @@ const App = () => {
 
   return (
     <div>
-      <LoginForm/>
-hello
+      <SignIn/>
   </div>
   );
 };
