@@ -1,14 +1,21 @@
 import React from 'react';
-import SignIn from './pages/auth/Login';
+import { useRoutes } from 'react-router-dom';
+import SignIn from './pages/login ui/Login';
 
 const App = () => {
+  const routes = [
+    {
+      path: '/',
+      element: <SignIn />,
+    },
+  ];
 
-
+  const router = useRoutes(routes);
 
   return (
     <div>
-      <SignIn/>
-  </div>
+      {router}
+    </div>
   );
 };
 

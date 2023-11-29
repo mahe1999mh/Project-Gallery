@@ -38,6 +38,7 @@ export default function SignIn() {
   const [loginMutation, { isLoading, error, data }] = useLoginMutation({
     onSuccess: (data) => {
       // Handle success here, e.g., show a pop-up
+      alert("'Login successful")
       console.log('Login successful!', data);
       // You may use a state variable to manage the state of your pop-up
       // Example: setSuccessPopup(true);
