@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useLoginMutation } from '../store/authApi';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -34,16 +35,9 @@ export default function SignIn() {
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
 
-  const [loginMutation, { isLoading, error, data }] = useLoginMutation({
-    onSuccess: (data) => {
-      // Handle success here, e.g., show a pop-up
-      alert("'Login successful")
-      console.log('Login successful!', data);
-      // You may use a state variable to manage the state of your pop-up
-      // Example: setSuccessPopup(true);
-    },
-  });
+  const [loginMutation, { isLoading, error, data }] = useLoginMutation();
 
   const handleInputChange = (e) => {
     setFormData({
@@ -58,6 +52,9 @@ export default function SignIn() {
   };
 
   console.log(data,formData,"data");
+  if (data) {
+    navigate('/admin/dashboard');
+  }
 
 if(isLoading){
   <CircularProgress size={24} /> 
