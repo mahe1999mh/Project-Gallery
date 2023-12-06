@@ -18,6 +18,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import BookIcon from '@mui/icons-material/Book';
 import LoginIcon from '@mui/icons-material/Login';
 import NotFoundIcon from '@mui/icons-material/Error';
+import CreatePostForm from './CreateProjectForm/CreateProjectForm';
 import CreateProjectForm from './CreateProjectForm/CreateProjectForm';
 
 const Sidebar = () => {
@@ -84,6 +85,7 @@ const Sidebar = () => {
         {/* Your main content goes here */}
         <Typography variant="h4">Welcome to Your App</Typography>
         <CreateProjectForm/>
+
         <p>This is your main content area.</p>
       </div>
     </div>
