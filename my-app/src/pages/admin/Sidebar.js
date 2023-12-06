@@ -18,6 +18,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import BookIcon from '@mui/icons-material/Book';
 import LoginIcon from '@mui/icons-material/Login';
 import NotFoundIcon from '@mui/icons-material/Error';
+import CreateProjectForm from './CreateProjectForm/CreateProjectForm';
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -79,9 +80,10 @@ const Sidebar = () => {
       </Drawer>
 
       {/* Main content area */}
-      <div style={{ marginLeft: open ? 340 : 0, padding: '20px', transition: 'margin-left 0.3s' }}>
+      <div style={{ marginLeft: open ? 230 : 0, padding: '20px', transition: 'margin-left 0.3s' }}>
         {/* Your main content goes here */}
         <Typography variant="h4">Welcome to Your App</Typography>
+        <CreateProjectForm/>
         <p>This is your main content area.</p>
       </div>
     </div>

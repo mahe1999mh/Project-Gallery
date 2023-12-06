@@ -53,6 +53,7 @@ export default function SignIn() {
 
   console.log(data,formData,"data");
   if (data) {
+    localStorage.setItem('token',data?.token)
     navigate('/admin/dashboard');
   }
 
