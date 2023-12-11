@@ -6,7 +6,6 @@ import Users from './pages/admin/User';
 import CreateProjectForm from './pages/admin/CreateProjectForm/CreateProjectForm';
 import Product from './pages/admin/Product';
 import Blog from './pages/admin/Blog';
-import Login from './pages/admin/Login';
 
 const AdminLayout = () => {
   return (

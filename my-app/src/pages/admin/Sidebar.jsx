@@ -61,7 +61,7 @@ const Sidebar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
-            Your App Name
+            Project-Gallery
           </Typography>
           <Link
             to={"/admin/dashboard/createProject"}
