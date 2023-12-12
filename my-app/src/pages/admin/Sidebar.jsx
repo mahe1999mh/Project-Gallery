@@ -10,6 +10,7 @@ import {
   ListItemText,
   Divider,
   ListItemIcon,
+  Avatar
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -46,22 +47,37 @@ const Sidebar = () => {
     <div>
       <AppBar position="fixed">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             edge="start"
             color="inherit"
             aria-label="menu"
             onClick={handleDrawerToggle}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography variant="h6" noWrap>
             Your App Name
           </Typography>
         </Toolbar>
       </AppBar>
 
-      <Drawer anchor="left" open={open} onClose={handleDrawerToggle}>
-        <List>
+      {/* <Drawer anchor="left" open> */}
+      
+     
+        <Divider />
+
+        {/* Additional items or sections in the sidebar */}
+      {/* </Drawer> */}
+
+      {/* Main content area */}
+      <div style={{marginTop: "70px"}}>
+        {/* Your main content goes here */}
+        <Typography variant="h4">Welcome to Your App</Typography>
+        <div style={{display: "flex"}}>
+          <List style={{ width: "200px" }}>
+            <ListItem style={{
+              backgroundColor: "#daecf3", margin: "15px 0px", borderRadius: "10px", display: "flex"
+            }}><Avatar alt='jhon'>J</Avatar ><Typography variant='subtitle2' >Jhon Deo</Typography></ListItem>
           {menuItems.map((item, index) => (
             <ListItem
               button
@@ -74,17 +90,8 @@ const Sidebar = () => {
             </ListItem>
           ))}
         </List>
-
-        <Divider />
-
-        {/* Additional items or sections in the sidebar */}
-      </Drawer>
-
-      {/* Main content area */}
-      <div style={{ marginLeft: open ? 230 : 0, padding: '20px', transition: 'margin-left 0.3s' }}>
-        {/* Your main content goes here */}
-        <Typography variant="h4">Welcome to Your App</Typography>
         <CreateProjectForm/>
+        </div>
 
         <p>This is your main content area.</p>
       </div>
