@@ -62,35 +62,35 @@ const App = () => {
 export default App;
 
 
-import React from "react";
-import { Navigate, Outlet, Route, Routes, useRoutes } from "react-router-dom";
-import SignIn from "./pages/admin/Login";
-import Sidebar from "./pages/admin/Sidebar";
-import Users from "./pages/admin/User";
-import CreateProjectForm from "./pages/admin/CreateProjectForm/CreateProjectForm";
-import Product from "./pages/admin/Product";
-import Blog from "./pages/admin/Blog";
+// import React from "react";
+// import { Navigate, Outlet, Route, Routes, useRoutes } from "react-router-dom";
+// import SignIn from "./pages/admin/Login";
+// import Sidebar from "./pages/admin/Sidebar";
+// import Users from "./pages/admin/User";
+// import CreateProjectForm from "./pages/admin/CreateProjectForm/CreateProjectForm";
+// import Product from "./pages/admin/Product";
+// import Blog from "./pages/admin/Blog";
 
-const AdminLayout = () => {
-  return (
-    <>
-      <Sidebar />
-      <Outlet />
-    </>
-  );
-};
+// const AdminLayout = () => {
+//   return (
+//     <>
+//       <Sidebar />
+//       <Outlet />
+//     </>
+//   );
+// };
 
-const PrivateRoute = ({ children, ...rest }) => {
-  const isAuthenticated = localStorage.getItem("token");
-  if (!isAuthenticated) {
-    return <Navigate to="/login" />;
-  }
-  return (
-    <Routes>
-      <Route {...rest} element={<React.Fragment>{children}</React.Fragment>} />
-    </Routes>
-  );
-};
+// const PrivateRoute = ({ children, ...rest }) => {
+//   const isAuthenticated = localStorage.getItem("token");
+//   if (!isAuthenticated) {
+//     return <Navigate to="/login" />;
+//   }
+//   return (
+//     <Routes>
+//       <Route {...rest} element={<React.Fragment>{children}</React.Fragment>} />
+//     </Routes>
+//   );
+// };
 
 // const App = () => {
 //   const routes = [
