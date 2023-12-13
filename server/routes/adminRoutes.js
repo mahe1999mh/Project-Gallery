@@ -59,7 +59,7 @@ router.post('/projects', authenticateJwt, (req, res) => {
   if (!title || !description || !price) {
     return res.status(400).json({ message: 'Missing required fields' });
   }
-  db.query('INSERT INTO project (title, description, price , image_link, published) VALUES (?, ?, ?)', [title, description, price,image_link,published], (err, result) => {
+  db.query('INSERT INTO project (title, description, price , image_link, published) VALUES (?, ?, ?, ?, ?)', [title, description, price,image_link,published], (err, result) => {
     if (err) {
       console.error('Error inserting project into the database:', err);
       return res.status(500).json({ message: 'Internal server error' });
