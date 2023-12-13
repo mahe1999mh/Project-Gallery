@@ -26,7 +26,11 @@ const ProjectForm = ({ open, onClose, onSubmit }) => {
         try {
             // Set loading to true while waiting for the project creation
             createProject(formData);
-            // onSubmit(formData); // You may want to handle submission after project creation is complete
+            
+            setFormData({})
+            onSubmit(formData); // You may want to handle submission after project creation is complete
+            
+            
         } catch (error) {
             console.error('Error creating project:', error.message);
         }

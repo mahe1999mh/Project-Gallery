@@ -4,14 +4,15 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import ShareIcon from '@mui/icons-material/Share';
+import { Button, CardActionArea, CardActions, IconButton } from '@mui/material';
 
 // Functional Component
 const CardAction = (props) => {
   const { title, description, imageUrl, altText, buttonText } = props;
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: 300, height: 300 }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -28,11 +29,15 @@ const CardAction = (props) => {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <Button size="small" variant='contained'>
+      <CardActions sx={{display:'flex', justifyContent:'space-between'}}>
+        <Button size="small" >
           {buttonText}
         </Button>
+        <IconButton aria-label="share">
+          <ShareIcon />
+        </IconButton>
       </CardActions>
+
     </Card>
   );
 };
