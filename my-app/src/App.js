@@ -3,9 +3,10 @@ import { Outlet, useRoutes } from 'react-router-dom';
 import SignIn from './pages/admin/Login';
 import Sidebar from './pages/admin/Sidebar';
 import Users from './pages/admin/User';
-import CreateProjectForm from './pages/admin/CreateProjectForm/CreateProjectForm';
 import Product from './pages/admin/Product';
 import Blog from './pages/admin/Blog';
+import Dashboard from './pages/admin/Dashboard';
+import CreateProject from './pages/admin/CreateProject';
 
 const AdminLayout = () => {
   return (
@@ -26,17 +27,22 @@ const App = () => {
       path: '/login',
       element: <SignIn />,
     },
+
     {
-      path: '/admin/dashboard',
+      path: '/admin',
       element: <AdminLayout />,
       children: [
+        {
+          path: 'dashboard',
+          element: <Dashboard />
+        },
         {
           path: "users",
           element: <Users />
         },
         {
           path: "createProject",
-          element: <CreateProjectForm />
+          element: <CreateProject />
         },
         {
           path: "products",
