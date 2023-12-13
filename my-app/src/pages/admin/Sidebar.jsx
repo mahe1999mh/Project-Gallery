@@ -20,8 +20,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import NotFoundIcon from "@mui/icons-material/Error";
 
 import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
-// import CreateProjectForm from './CreateProjectForm/CreateProjectForm';
+
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -36,14 +35,14 @@ const Sidebar = () => {
   };
 
   const menuItems = [
-    { text: "Dashboard", icon: <DashboardIcon />, route: "/Dashboard" },
-    { text: "User", icon: <PersonIcon />, route: "/admin/dashboard/users" },
+    { text: "Dashboard", icon: <DashboardIcon />, route: "/admin/dashboard" },
+    { text: "User", icon: <PersonIcon />, route: "/admin/users" },
     {
       text: "Product",
       icon: <ShoppingCartIcon />,
-      route: "/admin/dashboard/products",
+      route: "/admin/products",
     },
-    { text: "Blog", icon: <BookIcon />, route: "/admin/dashboard/blog" },
+    { text: "Blog", icon: <BookIcon />, route: "/admin/blog" },
     { text: "Login", icon: <LoginIcon />, route: "/login" },
     { text: "Not Found", icon: <NotFoundIcon />, route: "/404" },
   ];
@@ -63,13 +62,9 @@ const Sidebar = () => {
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
             Project-Gallery
           </Typography>
-          <Link
-            to={"/admin/dashboard/createProject"}
-            style={{ textDecoration: "none", color: "white" }}
-          >
-            <Button color="inherit">Create Project</Button>
-          </Link>
+
         </Toolbar>
+
       </AppBar>
 
       <Drawer anchor="left" open={open} onClose={handleDrawerToggle}>
