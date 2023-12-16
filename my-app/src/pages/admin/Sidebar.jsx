@@ -17,10 +17,8 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import BookIcon from "@mui/icons-material/Book";
 import LoginIcon from "@mui/icons-material/Login";
-import NotFoundIcon from "@mui/icons-material/Error";
 
 import { Link } from "react-router-dom";
-
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -32,6 +30,9 @@ const Sidebar = () => {
 
   const handleListItemClick = (index) => {
     setSelectedIndex(index);
+    if (index === menuItems.length - 1) {
+      localStorage.removeItem("token");
+    }
   };
 
   const menuItems = [
@@ -44,7 +45,6 @@ const Sidebar = () => {
     },
     { text: "Blog", icon: <BookIcon />, route: "/admin/blog" },
     { text: "Login", icon: <LoginIcon />, route: "/login" },
-    { text: "Not Found", icon: <NotFoundIcon />, route: "/404" },
   ];
 
   return (
@@ -62,9 +62,7 @@ const Sidebar = () => {
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
             Project-Gallery
           </Typography>
-
         </Toolbar>
-
       </AppBar>
 
       <Drawer anchor="left" open={open} onClose={handleDrawerToggle}>
