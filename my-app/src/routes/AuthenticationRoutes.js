@@ -7,6 +7,7 @@ import Dashboard from "@mui/icons-material/Dashboard";
 import SignIn from "../pages/admin/Login";
 import { Navigate, Outlet, useRoutes } from "react-router-dom";
 import Sidebar from "../pages/admin/Sidebar";
+import SignUp from "../pages/user/SignUp";
 
 const AdminLayout = () => {
   return (
@@ -27,6 +28,10 @@ const AuthenticationRoutes = () => {
     {
       path: "/login",
       element: <SignIn />,
+    },
+    {
+      path: "/user/signUp",
+      element: <SignUp />,
     },
     {
       path: "/admin",
