@@ -1,22 +1,31 @@
 // projectsApi.js
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const projectsApi = createApi({
-  reducerPath: 'projectsApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/' }),
+  reducerPath: "projectsApi",
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/" }),
 
   endpoints: (builder) => ({
     getProjectsApi: builder.query({
-      query: () => 'user/projects',
+      query: () => "user/projects",
     }),
 
     addPost: builder.mutation({
       query: (body) => ({
         url: `/admin/projects`,
-        method: 'POST',
+        method: "POST",
         body,
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }),
+    }),
+    getAllUserData: builder.query({
+      query: () => ({
+        url: "admin/getAllUser",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }),
     }),
@@ -31,5 +40,6 @@ export const {
   useGetProjectsApiQuery,
   useGetProjectsAdminQuery,
   createProjectUser,
-  useAddPostMutation
+  useAddPostMutation,
+  useGetAllUserDataQuery,
 } = projectsApi;
