@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import MyTable from "../../components/Table";
 import {
+  useDeleteProjectMutation,
+  useGetAllProjectDataQuery,
   useGetAllUserDataQuery,
   useGetProjectsApiQuery,
 } from "../store/projectsApi";
@@ -8,9 +10,11 @@ import { Box } from "@mui/material";
 
 const Users = () => {
   const [tableData, setTableData] = useState([]);
-  const { data, isSuccess } = useGetProjectsApiQuery(); // all projrct data
+  const { data } = useGetProjectsApiQuery(); // all projrct data
   const { data: getAllUser } = useGetAllUserDataQuery(); //all user data api
-  console.log("getAllUser", getAllUser);
+  const [deleteProject] = useDeleteProjectMutation(); // Delete project
+  const { data: getAllProject, isSuccess } = useGetAllProjectDataQuery();
+  console.log("getAllUser", data, deleteProject, getAllProject, getAllUser);
 
   const tableColumns = [
     { id: "id", label: "ID" },
@@ -21,9 +25,9 @@ const Users = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      setTableData(data?.projects);
+      setTableData(getAllProject?.projects);
     }
-  }, [isSuccess, data?.projects]);
+  }, [isSuccess, getAllProject?.projects]);
 
   return (
     <Box sx={{ pt: 2 }}>

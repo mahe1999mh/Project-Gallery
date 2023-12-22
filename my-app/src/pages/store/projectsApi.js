@@ -20,6 +20,17 @@ export const projectsApi = createApi({
         },
       }),
     }),
+    //Get ALL Project data
+    getAllProjectData: builder.query({
+      query: () => ({
+        url: "admin/projects",
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }),
+    }),
+    //Get All userLogin Data
     getAllUserData: builder.query({
       query: () => ({
         url: "admin/getAllUser",
@@ -29,17 +40,23 @@ export const projectsApi = createApi({
         },
       }),
     }),
-
-    createProjectUser: builder.mutation({
-      // Define mutation configuration here
+    //DELETE Project
+    deleteProject: builder.mutation({
+      query: (id) => ({
+        url: `admin/projects/${id}`,
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }),
     }),
   }),
 });
 
 export const {
   useGetProjectsApiQuery,
-  useGetProjectsAdminQuery,
-  createProjectUser,
+  useGetAllProjectDataQuery,
   useAddPostMutation,
   useGetAllUserDataQuery,
+  useDeleteProjectMutation,
 } = projectsApi;
