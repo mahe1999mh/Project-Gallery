@@ -13,7 +13,7 @@ const rowsPerPageOptions = [5, 10, 25, 100];
 
 const MyTable = ({ columns, data }) => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[0]);
+  const [rowsPerPage, setRowsPerPage] = useState(rowsPerPageOptions[1]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

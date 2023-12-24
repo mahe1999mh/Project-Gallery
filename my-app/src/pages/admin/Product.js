@@ -1,16 +1,36 @@
-import React from "react";
-import { useGetProjectsApiQuery } from "../store/projectsApi";
-import CardAction from "../../components/CardAction";
+import React, { useState, useEffect } from "react";
+import { useGetProjectsApiQuery, useGetAllProjectDataQuery } from "../store/projectsApi";
+// import CardAction from "../../components/CardAction";
 import CreateProject from "./CreateProject";
+import { Box } from "@mui/material";
+import MyTable from "../../components/Table";
+
+
 
 const Product = () => {
+  const [tableData, setTableData] = useState([]);
   const { data } = useGetProjectsApiQuery();
-  console.log("data", data?.projects);
+  const { data: getAllProject, isSuccess } = useGetAllProjectDataQuery();
+
+  console.log("data", data);
+  const tableColumns = [
+    { id: "id", label: "ID" },
+    { id: "title", label: "Title" },
+    { id: "published", label: "Published" },
+    { id: "price", label: "Price" },
+  ];
+
+  useEffect(() => {
+    if (isSuccess) {
+      setTableData(getAllProject?.projects);
+    }
+  }, [isSuccess, getAllProject?.projects]);
+
   return (
     <>
       <CreateProject />
 
-      <div
+      {/* <div
         style={{
           display: "flex",
           flexWrap: "wrap",
@@ -32,7 +52,10 @@ const Product = () => {
             buttonText="BUY NOW"
           />
         ))}
-      </div>
+      </div> */}
+      <Box sx={{ pt: 2 }}>
+        <MyTable columns={tableColumns} data={tableData} />
+      </Box>
     </>
   );
 };
