@@ -1,33 +1,29 @@
 import React, { useEffect, useState } from "react";
 import MyTable from "../../components/Table";
 import {
-  useDeleteProjectMutation,
-  useGetAllProjectDataQuery,
   useGetAllUserDataQuery,
-  useGetProjectsApiQuery,
 } from "../store/projectsApi";
 import { Box } from "@mui/material";
 
 const Users = () => {
   const [tableData, setTableData] = useState([]);
-  const { data } = useGetProjectsApiQuery(); // all projrct data
-  const { data: getAllUser } = useGetAllUserDataQuery(); //all user data api
-  const [deleteProject] = useDeleteProjectMutation(); // Delete project
-  const { data: getAllProject, isSuccess } = useGetAllProjectDataQuery();
-  console.log("getAllUser", data, deleteProject, getAllProject, getAllUser);
+  const { data } = useGetAllUserDataQuery();
+  const { data: getAllUser, isSuccess } = useGetAllUserDataQuery(); //all user data api
+  console.log("getAllUser", data, getAllUser);
 
   const tableColumns = [
     { id: "id", label: "ID" },
-    { id: "title", label: "Title" },
-    { id: "published", label: "Published" },
-    { id: "price", label: "Price" },
+    { id: "name", label: "Name" },
+    { id: "email", label: "Email" },
+    { id: "phoneNumber", label: "Phone Number" },
+    { id: "password", label: "Password" },
   ];
 
   useEffect(() => {
     if (isSuccess) {
-      setTableData(getAllProject?.projects);
+      setTableData(getAllUser);
     }
-  }, [isSuccess, getAllProject?.projects]);
+  }, [isSuccess, getAllUser]);
 
   return (
     <Box sx={{ pt: 2 }}>
