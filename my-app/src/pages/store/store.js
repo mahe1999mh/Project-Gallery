@@ -7,7 +7,7 @@ const store = configureStore({
   reducer: {
     [projectsApi.reducerPath]: projectsApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
-    [usersApi.reducer]: usersApi.reducer,
+    [usersApi.reducerPath]: usersApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false })

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,24 +11,59 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useCreateUserMutation } from "../store/usersApi";
+import { CircularProgress } from "@mui/material";
 
 const defaultTheme = createTheme();
 
 const SignUp = () => {
-  const [createUser, { isLoading, error }] = useCreateUserMutation();
-  //   const handleSubmit = async (event) => {
-  //     event.preventDefault();
+  const [createUser, { isLoading, isError }] = useCreateUserMutation();
 
-  //     // Fetch user data from form
-  //     const userData = { ... }; // Extract user data from form fields
+  const [userData, setUserData] = useState({
+    name: '',
+    email: '',
+    phoneNumber: '',
+    password: '',
+  });
 
-  //     try {
-  //       await createUser(userData);
-  //       // Handle successful creation
-  //     } catch (err) {
-  //       // Handle errors
-  //     }
-  //   };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData({
+      ...userData,
+      [name]: value,
+    })
+  }
+
+  useEffect(() => {
+    console.log('userData:', userData);
+  }, [userData]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    // Fetch user data from form
+    // const userData = { ...userData }; // Extract user data from form fields\
+
+
+
+    try {
+      await createUser(userData);
+      setUserData({
+        name: '',
+        email: '',
+        phoneNumber: '',
+        password: '',
+      })
+      // console.log({ userData });
+      // Handle successful creation
+    } catch (error) {
+      // Handle errors
+      console.error('Error SigUp:', error.message);
+    }
+  };
+
+  if (isError ?? isLoading) {
+    return <CircularProgress size={24} />
+  }
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -49,19 +84,21 @@ const SignUp = () => {
           </Typography>
           <Box
             component="form"
-            // onSubmit={handleSignUp}
+            onSubmit={handleSubmit}
             noValidate
             sx={{ mt: 1 }}
           >
             <TextField
               margin="normal"
               autoComplete="fname"
-              name="fullName"
+              name="name"
               variant="outlined"
               required
               fullWidth
-              id="fullName"
-              label="Full Name"
+              id="name"
+              label="Name"
+              value={userData.name}
+              onChange={handleInputChange}
               autoFocus
             />
 
@@ -73,16 +110,20 @@ const SignUp = () => {
               id="email"
               label="Email Address"
               name="email"
+              value={userData.email}
+              onChange={handleInputChange}
               autoComplete="email"
             />
             <TextField
               margin="normal"
               variant="outlined"
               fullWidth
-              id="phone"
+              id="phoneNumber"
               label="Phone Number (Optional)"
-              name="phone"
-              autoComplete="phone"
+              name="phoneNumber"
+              value={userData.phoneNumber}
+              onChange={handleInputChange}
+              autoComplete="phoneNumber"
             />
             <TextField
               margin="normal"
@@ -92,6 +133,8 @@ const SignUp = () => {
               name="password"
               label="Password"
               type="password"
+              value={userData.password}
+              onChange={handleInputChange}
               id="password"
               autoComplete="current-password"
             />
