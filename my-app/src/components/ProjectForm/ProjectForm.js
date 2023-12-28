@@ -26,18 +26,18 @@ const ProjectForm = ({ open, onClose, onSubmit }) => {
         try {
             // Set loading to true while waiting for the project creation
             createProject(formData);
-            
+
             setFormData({})
             onSubmit(formData); // You may want to handle submission after project creation is complete
-            
-            
+
+
         } catch (error) {
             console.error('Error creating project:', error.message);
         }
     };
-if(isError ?? isLoading){
-    return <CircularProgress size={24} />
-}
+    if (isError ?? isLoading) {
+        return <CircularProgress size={24} />
+    }
     return (
         <Dialog open={open} onClose={onClose}>
             <DialogTitle>Create Project</DialogTitle>
@@ -89,9 +89,9 @@ if(isError ?? isLoading){
             <DialogActions>
                 <Button variant="contained" color="error" size="large" onClick={onClose}>Cancel</Button>
                 <Button type="submit" onClick={handleSubmit} variant="contained" size="large" color="primary" disabled={isLoading}>
-                     {isLoading ? <CircularProgress size={24} /> : "Save Project" }
+                    {isLoading ? <CircularProgress size={24} /> : "Save Project"}
                 </Button>
-                
+
             </DialogActions>
         </Dialog>
     );
