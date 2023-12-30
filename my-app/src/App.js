@@ -1,10 +1,10 @@
 import React from "react";
-import AuthenticationRoutes from "./routes/AuthenticationRoutes";
+import IndexRoutes from "./routes/IndexRoutes";
 
 const App = () => {
   return (
     <div>
-      <AuthenticationRoutes />
+      <IndexRoutes />
     </div>
   );
 };

@@ -22,16 +22,12 @@ const AuthenticationRoutes = () => {
   const token = localStorage.getItem("token");
   const routes = [
     {
-      path: "/",
+      path: "/admin",
       element: <SignIn />,
     },
     {
-      path: "/login",
+      path: "/admin/login",
       element: <SignIn />,
-    },
-    {
-      path: "/user/signUp",
-      element: <SignUp />,
     },
     {
       path: "/admin",
