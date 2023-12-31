@@ -48,13 +48,25 @@ INSERT INTO `admins` (`id`, `username`, `password`) VALUES
 -- Table structure for table `project`
 --
 
+-- CREATE TABLE `project` (
+--   `id` bigint(20) UNSIGNED NOT NULL,
+--   `title` varchar(255) NOT NULL,
+--   `description` text DEFAULT NULL,
+--   `price` decimal(10,2) NOT NULL,
+--   `image_link` varchar(255) DEFAULT NULL,
+--   `published` tinyint(1) DEFAULT NULL
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 CREATE TABLE `project` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
-  `price` decimal(10,2) NOT NULL,
-  `image_link` varchar(255) DEFAULT NULL,
-  `published` tinyint(1) DEFAULT NULL
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
+  `title` VARCHAR(255) NOT NULL,
+  `description` TEXT NOT NULL,
+  `price` DECIMAL(10, 2) NOT NULL,
+  `image_link` VARCHAR(255),
+  `published` BOOLEAN NOT NULL,
+  `zip_path` LONGBLOB, -- Use LONGBLOB for storing binary data like ZIP files
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
