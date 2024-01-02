@@ -1,0 +1,69 @@
+
+import { Navigate } from "react-router-dom";
+import Dashboard from "../LocalComponent/MainLayout/DashboardLayout";
+import Subscription from "../screen/Taxation/Subscription";
+import RegisterForm from "../screen/PayPack/Subscription/RegisterForm";
+import Summary from "../screen/PayPack/Subscription/Summary";
+import FeedbackForm from "../screen/PayPack/Subscription/FeedbackForm";
+
+const PayPackRoute = isLoggedIn => ({
+  path: "/payPack",
+  element: isLoggedIn ? <Dashboard /> : <Navigate to={`/login`} replace />,
+  children: [
+    {
+      path: `/payPack`,
+      element: <Navigate to={"/payPack"} />,
+    },
+    {
+      path: "/payPack/payPack",
+      element: <Subscription />,
+      children: [
+        {
+          path: "/payPack/payPack",
+          element: <Navigate to={"/payPack/payPack/register_form"} />,
+        },
+        {
+          path: "/payPack/payPack/register_form",
+          element: <RegisterForm />,
+        },
+        {
+          path: "/payPack/payPack/summary",
+          element: <Summary />,
+        },
+        {
+          path: "/payPack/payPack",
+          element: <Navigate to={"/payPack/payPack/feedback_form"} />,
+        },
+        {
+          path: "/payPack/payPack/feedback_form",
+          element: <FeedbackForm />,
+        },
+      ],
+    },
+  ],
+});
+export default PayPackRoute;
+
+//index.js
+
+  const schemaModule = useMemo(() => {
+    if (isLoggedIn) {
+      if (module == "taxation") return TaxationRoutes(isLoggedIn);
+      if (module == "gsp") return GSPRoutes(isLoggedIn);
+      if (module == "payPack") return PayPackRoute(isLoggedIn);
+      return DashBoardRoute(isLoggedIn);
+    }
+    return AuthenticationRoutes();
+  }, [isLoggedIn, module]);
+  // ============================
+  return useRoutes([
+    schemaModule,
+    // isLoggedIn ? Dashboard() : AuthenticationRoutes(isLoggedIn),
+    // isLoggedIn ?  : AuthenticationRoutes(),
+    // MainRoutes(isLoggedIn),
+    // AddCompanyRoutes(isLoggedIn, schema)
+    ,
+  ]);
+};
+
+export default Routes;
