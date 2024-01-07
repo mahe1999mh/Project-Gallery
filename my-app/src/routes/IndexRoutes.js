@@ -4,19 +4,15 @@ import AuthenticationRoutes from "./AuthenticationRoutes";
 
 const IndexRoutes = () => {
   const pathname = window.location.pathname.split("/")[1];
-  return (
-    <div>
-      {pathname !== "admin" ? (
-        <UserRoutes />
-      ) : pathname === "login" ? (
-        <UserRoutes />
-      ) : pathname === "" ? (
-        <UserRoutes />
-      ) : (
-        <AuthenticationRoutes />
-      )}
-    </div>
-  );
+  let renderRoutes;
+
+  if (pathname !== "admin" || pathname === "login" || pathname === "") {
+    renderRoutes = <UserRoutes />;
+  } else {
+    renderRoutes = <AuthenticationRoutes />;
+  }
+
+  return <div>{renderRoutes}</div>;
 };
 
 export default IndexRoutes;
