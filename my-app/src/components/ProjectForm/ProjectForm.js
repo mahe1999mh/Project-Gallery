@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Switch, FormControlLabel, Button, Dialog, DialogActions, DialogContent, CircularProgress, DialogTitle } from '@mui/material';
+import { TextField, Switch, FormControlLabel, Button, Dialog, DialogActions, DialogContent, CircularProgress, DialogTitle, Input } from '@mui/material';
 import { useAddPostMutation } from '../../pages/store/projectsApi';
 
 const ProjectForm = ({ open, onClose, onSubmit }) => {
@@ -10,6 +10,7 @@ const ProjectForm = ({ open, onClose, onSubmit }) => {
         price: '',
         image_link: '',
         published: false,
+        zip_path:"",
     });
 
     const handleInputChange = (e) => {
@@ -19,6 +20,23 @@ const ProjectForm = ({ open, onClose, onSubmit }) => {
             [name]: type === 'checkbox' ? checked : value,
         });
     };
+    const handleFileChange = (e) =>{
+     console.log(e.target.files[0]);
+
+     let reader = new  FileReader();
+     reader.readAsDataURL(e.target.files[0])
+     reader.onload = () =>{
+        console.log(reader.result);
+        setFormData({
+            ...formData,
+            zip_path: reader.result, 
+        });
+     };
+     reader.onerror = error => {
+        console.log("error ", error);
+     }
+
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -75,6 +93,7 @@ const ProjectForm = ({ open, onClose, onSubmit }) => {
                     onChange={handleInputChange}
                     margin="normal"
                 />
+                <Input type="file" name="zip_path" onChange={handleFileChange} hidden/>
                 <FormControlLabel
                     control={
                         <Switch
